@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: HM Anonymizer
-Description: Anyonymize user data
+Description: Anonymize user data
 Author: Human Made Limited
 Version: 1.0
 Author URI: http://hmn.md
