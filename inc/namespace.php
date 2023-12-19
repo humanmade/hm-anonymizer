@@ -48,7 +48,7 @@ function generate_user_data() : array {
 		'user_pass' => wp_generate_password(),
 		'user_nicename' => strtolower( sprintf( '%s-%s', $first_name, $last_name ) ),
 		'user_email' => strtolower( sprintf( '%s.%s@example.com', $first_name, $last_name ) ),
-		'user_url' => strtolower( sprintf( 'http://example.com/%s-%s', $first_name, $last_name ) ),
+		'user_url' => sprintf( 'http://example.com/%s', sanitize_title( $first_name . '-' . $last_name ) ),
 		'display_name' => sprintf( '%s %s', ucfirst( $first_name ), ucfirst( $last_name ) ),
 		'first_name' => ucfirst( $first_name ),
 		'last_name' => ucfirst( $last_name ),

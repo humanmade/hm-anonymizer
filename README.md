@@ -15,6 +15,40 @@ Once you've done so, you can install this package with:
 
     wp package install git@github.com:humanmade/hm-anonymizer.git
 
+## Commands
+
+### Anonymize users
+
+Replace all core user fields with anonymized data e.g. "Hazy Hippopotamus". This includes names, email addresses, URLs. Passwords are also regenerated.
+
+The following fields are also cleared: Description, all registered user contact methods (including any customisations).
+
+User Meta. Custom user meta fields are not anonymized. You can use the filter `hm_anoymizer.user_data` to modify user data and include any user meta fields.
+
+```
+add_filter( 'hm_anoymizer.user_data', function( $user_data ) {
+	// Add custom user meta data.
+	$user_data['meta_input']['custom-meta'] = 'supercalifragilisticexpialidocious';
+	return $user_data;
+} );
+```
+
+**Args:**
+
+* **exclude** Comma separated list of user IDs to skip.
+
+```
+wp anonymizer anonymize-users --exclude=1,2,3
+```
+
+### Delete Gravity Forms Entries
+
+Delets all entries across all forms.
+
+```
+wp anonymizer delete-gravity-forms-entries
+```
+
 ## Contributing
 
 We appreciate you taking the initiative to contribute to this project.
