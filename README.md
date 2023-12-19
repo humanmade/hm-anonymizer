@@ -15,6 +15,10 @@ Once you've done so, you can install this package with:
 
     wp package install git@github.com:humanmade/hm-anonymizer.git
 
+Or
+
+    wp plugin install https://github.com/humanmade/hm-anonymizer/archive/refs/heads/main.zip && wp plugin activate hm-anonymizer --network
+
 ## Commands
 
 ### Anonymize users
