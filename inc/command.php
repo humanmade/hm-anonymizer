@@ -34,6 +34,7 @@ class Command extends WP_CLI_Command {
 				'offset' => $offset,
 				'orderby' => 'ID',
 				'exclude' => $exclude,
+				'blog_id' => 0,
 			];
 
 			$query = new WP_User_Query( $query_args );
