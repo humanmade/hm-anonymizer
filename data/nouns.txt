@@ -1,111 +1,180 @@
 aardvark
+abkhazian
 accountant
 actor
+afghan
+afghan turkmen
+albanian
+algerian
 alligator
 alpaca
+andorran
 angelfish
+angolan
 ant
 antelope
 aphid
 architect
+argentine
 armadillo
+armenian
 artist
 asari
 asgardian
+assyrian
 athlete
+australian
 australian shepherd
+austrian
 axolotl
 azalea
+azerbaijani
+bahraini
+baloch
+bangladeshi
 banshee
+barbadian
 basilisk
+basque
 bat
 beagle
 beaver
 bee
 beetle
+belarusian
+belgian
+belizean
 bengal
+beninese
+bhutanese
 bird
 bison
 black bear
 bluebell
 bobcat
+bolivian
 border collie
 border terrier
 borg
+bosniak
+bosnian
 boxer
+brazilian
+breton
+bruneian
 budgie
 bulbasaur
+bulgarian
 bulldog
 bumblebee
+burkinabe
+burundian
 butterfly
 calico
+cambodian
 camel
+cameroonian
+canadian
 canary
+cape verdean
 capybara
 carnation
 carpenter
 cassowary
 cat
+catalan
 caterpillar
 centaur
 centipede
+central african
+chadian
 charizard
+chechen
 cheetah
 chef
 chicken
 chihuahua
+chilean
 chimera
 chimpanzee
 chinchilla
+chinese
 chipmunk
 chrysanthemum
 chupacabra
+chuvash
 clownfish
 cockatiel
 cockatoo
 cockroach
+colombian
+comorian
+congolese
 conure
+cornish
+costa rican
 cow
 coyote
 crab
 cricket
+crimean tatar
+croatian
 crocodile
 cthulhu
+cuban
 cyberman
 cybertronian
 cyclops
+cypriot
+czech
 dachshund
 daffodil
+dagestani
 daisy
 dalek
+danish
 deer
 dhole
 discus
+djiboutian
 doctor
 dodo
 dog
 dolphin
+dominican
 donkey
 dragon
 dragonfly
 duck
+dutch
 dwarf
 eagle
 earwig
+east timorese
+ecuadorian
 eevee
+egyptian
 eldar
 electrician
 elephant
 elf
 elk
+emirati
 engineer
+english
+eritrean
+estonian
+ethiopian
 ewok
 falcon
 farmer
 fennec fox
 ferengi
 ferret
+fijian
+filipino
 finch
+finnish
 firefly
 fish
 flamingo
@@ -113,10 +182,17 @@ flea
 fly
 fox
 frankenstein
+french
+frisian
 frog
+gabonese
+gambian
 gaur
 gecko
+georgian
 gerbera
+german
+ghanaian
 ghost
 ghoul
 gila monster
@@ -129,84 +205,149 @@ gorgon
 gorilla
 grasshopper
 great dane
+greek
 gremlin
+grenadian
 griffin
 grizzly bear
 gruffalo
+guatemalan
 guinea pig
+guinean
 guppy
+guyanese
 gyarados
+haitian
 hamster
 hare
 harpy
 hawk
 hedgehog
 hippopotamus
+honduran
 hornet
 horse
+hungarian
 hydrangea
 hyena
+icelander
+indian
+indonesian
+iranian
+iraqi
 iris
+irish
+israeli
+italian
+ivorian
 jack russel
+jamaican
+japanese
 jasmine
 jawa
 jellyfish
 jigglypuff
+jordanian
 kangaroo
+kazakhstani
+kenyan
 klingon
 koala
 komodo dragon
+kosovar
 kraken
 krogan
 kryptonian
+kuwaiti
+kyrgyz
 labrador
 ladybug
+laotian
+latvian
 lavender
 lawyer
+lebanese
 lemming
 lemur
+liberian
 librarian
+libyan
+liechtensteiner
 lily
 lion
+lithuanian
 lizard
 llama
 lobster
 lovebird
+luxembourgish
 lynx
 macaw
+macedonian
 maine coon
+malagasy
+malawian
+malaysian
+maldivian
+malian
 maltese
 manatee
 marigold
 marmoset
+marshallese
+mauritanian
+mauritian
 meowth
 mermaid/merman
 mewtwo
+mexican
+micronesian
 mimbari
 minotaur
+moldovan
+monegasque
+mongolian
 monkey
+montenegrin
 moose
+moroccan
 mosquito
 moth
+mozambican
 mummy
 musician
+namibian
 narn
 narwhal
+nauruan
 navi
+nepalese
 neptunian
+new zealander
 newt
+nicaraguan
+nigerian
+nigerien
+north korean
+norwegian
 nurse
 ocelot
 octopus
 okapi
+omani
 orangutan
 orchid
 ostrich
 otter
 owl
+pakistani
+palauan
+panamanian
 panda
 pangolin
 pansy
+papua new guinean
+paraguayan
 parakeet
 parrot
 peacock
@@ -214,6 +355,7 @@ pelican
 penguin
 peony
 persian
+peruvian
 phoenix
 pig
 pikachu
@@ -223,11 +365,14 @@ pixie
 platypus
 polar bear
 police officer
+polish
 poodle
 poppy
+portuguese
 praying mantis
 proboscis monkey
 puffin
+qatari
 quokka
 rabbit
 raccoon
@@ -236,15 +381,28 @@ replicant
 rhino
 rhinoceros
 rodian
+romanian
 rooster
 rose
 rottweiler
+russian
+rwandan
+saint lucian
 salamander
+salvadoran
+samoan
+san marinese
 sandworm
+sao tomean
+saudi arabian
 scientist
 scorpion
+scottish
 seahorse
+senegalese
+serbian
 serval
+seychellois
 shark
 sheep
 sheepdog
@@ -252,45 +410,82 @@ shih tzu
 shrimp
 siamese
 siberian husky
+sierra leonean
 silverfish
+singaporean
 slender man
 sloth
+slovak
+slovenian
 snake
 snorlax
+solomon islander
+somali
 sontaran
+south african
+south korean
+south sudanese
 spaniel
+spanish
 sphynx
 spider
 squirrel
 squirtle
+sri lankan
 starfish
+sudanese
 sunflower
+surinamese
 swan
+swazi
+swedish
+swiss
+syrian
 tabby
+taiwanese
+tajik
+tanzanian
 tapir
 tasmanian devil
 teacher
 termite
 tetra
+thai
 tick
 tiger
 toad
+togolese
+tongan
 tortoise
 toucan
 trill
+trinidadian and tobagonian
 troll
 tulip
+tunisian
 turian
+turkish
+turkmen
 turtle
+tuvaluan
 twi'lek
+ugandan
+ukrainian
 unicorn
+uruguayan
+uzbek
 vampire
+vanuatuan
+vatican city state
+venezuelan
 vicuña
+vietnamese
 vulcan
 walking stick
 wallaby
 wasp
 weevil
+welsh
 wendigo
 werewolf
 whale
@@ -300,8 +495,11 @@ wombat
 wookiee
 writer
 xenomorph
+yemeni
 yeti
 zabrak
+zambian
 zebra
 zerg
+zimbabwean
 zombie
