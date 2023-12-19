@@ -1,0 +1,13 @@
+{
+    "name": "humanmade/hm-anonymizer",
+    "description": "WP CLI command to anonymize personally identifiable information in a WordPress database",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthew Haines-Young",
+            "email": "matthew@humanmade.com"
+        }
+    ],
+    "require": {}
+}
