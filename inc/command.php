@@ -17,6 +17,9 @@ class Command extends WP_CLI_Command {
 	 * [--exclude=<exclude>]
 	 * : Exclude users by ID.
 	 *
+	 * [--alliteration]
+	 * : Alliterate user names.
+	 *
 	 * @subcommand anonymize-users
 	 */
 	public function anonymize_users( $args, $assoc_args ) : void {
@@ -24,6 +27,7 @@ class Command extends WP_CLI_Command {
 		$batch_size = 100;
 
 		$exclude = isset( $assoc_args['exclude'] ) ? array_map( 'absint', explode( ',', $assoc_args['exclude'] ) ) : [];
+		$use_alliteration = ! empty( $assoc_args['alliteration'] );
 
 		do {
 			WP_CLI::line( "Updating a batch of $batch_size users." );
@@ -42,7 +46,7 @@ class Command extends WP_CLI_Command {
 			$users = $query->get_results();
 
 			foreach ( $users as $user_id ) {
-				if ( anonymize_user( $user_id ) ) {
+				if ( anonymize_user( $user_id, $use_alliteration ) ) {
 					WP_CLI::success( "Updated user: $user_id." );
 				} else {
 					WP_CLI::error( "Failed to update user: $user_id.", false );

@@ -24,17 +24,22 @@ function get_word_data( string $data_type ) : array {
 /**
  * Generate anonymous user data.
  *
+ * @param bool alliterate Should the fist and last names be alliterative e.g. Hazy Hippopotamus.
  * @return array User data can be passed to wp_insert_user.
  */
-function generate_user_data() : array {
+function generate_user_data( bool $alliterate = false ) : array {
 	$adjectives = get_word_data( 'adjectives' );
 	$nouns = get_word_data( 'nouns' );
 	$last_name = $nouns[ array_rand( $nouns ) ] ?? '';
-	// Always Alliterate.
-	$first_letter = substr( $last_name, 0, 1 );
-	$adjectives = array_values( array_filter( $adjectives, function( $word ) use ( $first_letter ) {
-		return ( strtolower( substr( $word, 0, 1 ) ) == strtolower( $first_letter ));
-	} ) );
+
+	// If alliterative, filter last names to only those that start with the first letter of the first name.
+	// Cool, but significantly reduces number of variation and will cause more conflicts on large dataset.
+	if ( $alliterate ) {
+		$first_letter = substr( $last_name, 0, 1 );
+		$adjectives = array_values( array_filter( $adjectives, function( $word ) use ( $first_letter ) {
+			return ( strtolower( substr( $word, 0, 1 ) ) == strtolower( $first_letter ));
+		} ) );
+	}
 
 	$first_name = $adjectives[ array_rand( $adjectives ) ];
 
@@ -42,6 +47,7 @@ function generate_user_data() : array {
 		$user_meta[ $contact_method ] = '';
 	}
 
+	// Use unique identifier in login and emails to avoid conflicts.
 	$login = uniqid( strtolower( sprintf( '%s%s', $first_name, $last_name ) ) );
 
 	return apply_filters( 'hm_anoymizer.user_data', [
@@ -63,10 +69,11 @@ function generate_user_data() : array {
  * Anonymize a user.
  *
  * @param int $user_id User ID.
+ * @param bool alliterate Should the fist and last names be alliterative e.g. Hazy Hippopotamus.
  * @return void
  */
-function anonymize_user( int $user_id ) : bool {
-	$user_data = generate_user_data();
+function anonymize_user( int $user_id, bool $alliterate = false ) : bool {
+	$user_data = generate_user_data( $alliterate );
 
 	// Override to force user_login to be updated.
 	$filter_user_data = function( $data_to_insert ) use ( $user_data ) {
