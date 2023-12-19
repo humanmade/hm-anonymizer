@@ -21,7 +21,7 @@ class Command extends WP_CLI_Command {
 	 */
 	public function anonymize_users( $args, $assoc_args ) : void {
 		$offset = 0;
-		$batch_size = 25;
+		$batch_size = 100;
 
 		$exclude = isset( $assoc_args['exclude'] ) ? array_map( 'absint', explode( ',', $assoc_args['exclude'] ) ) : [];
 
@@ -72,7 +72,7 @@ class Command extends WP_CLI_Command {
 		}
 
 		$offset = 0;
-		$batch_size = 25;
+		$batch_size = 100;
 
 		do {
 			WP_CLI::line( "Deleting a batch of $batch_size entries." );
