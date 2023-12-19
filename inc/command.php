@@ -42,8 +42,11 @@ class Command extends WP_CLI_Command {
 			$users = $query->get_results();
 
 			foreach ( $users as $user_id ) {
-				anonymize_user( $user_id );
-				WP_CLI::success( "Updated user: $user_id." );
+				if ( anonymize_user( $user_id ) ) {
+					WP_CLI::success( "Updated user: $user_id." );
+				} else {
+					WP_CLI::error( "Failed to update user: $user_id.", false );
+				}
 			}
 
 			$offset += $batch_size;

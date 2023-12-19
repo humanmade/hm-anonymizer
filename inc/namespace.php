@@ -30,7 +30,6 @@ function generate_user_data() : array {
 	$adjectives = get_word_data( 'adjectives' );
 	$nouns = get_word_data( 'nouns' );
 	$last_name = $nouns[ array_rand( $nouns ) ] ?? '';
-
 	// Always Alliterate.
 	$first_letter = substr( $last_name, 0, 1 );
 	$adjectives = array_values( array_filter( $adjectives, function( $word ) use ( $first_letter ) {
@@ -43,11 +42,13 @@ function generate_user_data() : array {
 		$user_meta[ $contact_method ] = '';
 	}
 
+	$login = uniqid( strtolower( sprintf( '%s%s', $first_name, $last_name ) ) );
+
 	return apply_filters( 'hm_anoymizer.user_data', [
-		'user_login' => strtolower( sprintf( '%s%s', $first_name, $last_name ) ),
+		'user_login' => $login,
 		'user_pass' => wp_generate_password(),
 		'user_nicename' => strtolower( sprintf( '%s-%s', $first_name, $last_name ) ),
-		'user_email' => strtolower( sprintf( '%s.%s@example.com', $first_name, $last_name ) ),
+		'user_email' => sanitize_email( sprintf( '%s@example.com', $login ) ),
 		'user_url' => sprintf( 'http://example.com/%s', sanitize_title( $first_name . '-' . $last_name ) ),
 		'display_name' => sprintf( '%s %s', ucfirst( $first_name ), ucfirst( $last_name ) ),
 		'first_name' => ucfirst( $first_name ),
@@ -64,7 +65,7 @@ function generate_user_data() : array {
  * @param int $user_id User ID.
  * @return void
  */
-function anonymize_user( int $user_id ) : void {
+function anonymize_user( int $user_id ) : bool {
 	$user_data = generate_user_data();
 
 	// Override to force user_login to be updated.
@@ -75,7 +76,9 @@ function anonymize_user( int $user_id ) : void {
 
 	add_filter( 'wp_pre_insert_user_data', $filter_user_data );
 
-	wp_update_user( array_merge( $user_data, [ 'ID' => $user_id ] ) );
+	$updated = wp_insert_user( array_merge( $user_data, [ 'ID' => $user_id ] ) );
 
 	remove_filter( 'wp_pre_insert_user_data', $filter_user_data );
+
+	return ! is_wp_error( $updated );
 }
