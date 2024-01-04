@@ -100,4 +100,43 @@ class Command extends WP_CLI_Command {
 			sleep( 1 );
 		} while ( count( $entries ) > 0 );
 	}
+
+	/**
+	 * Quickly empty gravity forms submission data across all sites on the network.
+	 *
+	 * Use this command on sites with a large number of entries that cannot be cleaned using the delete-gravity-forms-entries command.
+	 * It also runs network wide, and will clean tables even if the plugin is not active, or the site no longer exists.
+	 * The command delete-gravity-forms-entries is better as it fires actions, cleans up file uploads etc. But is very slow when dealing with a lot of submissions and can miss things.
+	 *
+	 * ## Examples
+	 *
+	 *     Usage on multisite: wp site list --field=url | xargs -n1 -I % wp --url=% anonymizer empty-gravity-forms-entry-tables-network-wide
+	 *
+	 * @subcommand empty-gravity-forms-entry-tables-network-wide
+	 * @return void
+	 */
+	public function empty_gravity_forms_entry_tables_network_wide() : void {
+		global $wpdb;
+
+		$table_results = $wpdb->get_results( $wpdb->prepare( "
+			SELECT table_name
+			FROM information_schema.tables
+			WHERE table_schema = %s
+			AND (
+				table_name REGEXP '^$wpdb->prefix([0-9]+_)?(gf_entry|df_lead)$'
+				OR table_name REGEXP '^$wpdb->prefix([0-9]+_)?(gf_entry|df_lead)_.+$'
+				OR table_name REGEXP '^$wpdb->prefix([0-9]+_)?gf_draft_submissions$'
+			)
+		", DB_NAME ) );
+
+		foreach ( $table_results as $result ) {
+			$query_result = $wpdb->query( "TRUNCATE TABLE $result->table_name" );
+
+			if ( $query_result ) {
+				WP_CLI::success( 'Emptied table ' . $result->table_name . '.' );
+			} else {
+				WP_CLI::error( 'Error emptying table ' . $result->table_name . '.' );
+			}
+		}
+	}
 }
