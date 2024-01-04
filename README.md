@@ -1,15 +1,15 @@
 humanmade/hm-anonymizer
-==============================
+=======================
 
 Quick links: [Using](#using) | [Installing](#installing) | [Contributing](#contributing) | [Support](#support)
 
-## Summary.
+When setting up a project locally, it is common to take a copy of the production database. Whilst this provides an accurate snapshot of the current site state, it can contain personally identifiable data that not desirable to keep locally. This includes but is not limited to
 
-Activate the plugin, and run WP CLI to delete or anonymize user data from a WordPress site.
+* WordPress users, whether only employees or public registrations.
+* Comments
+* Gravity Forms submissions
 
-Update your project documentation for copying a production database to include these steps to ensure that nobody has any personally identifyable information from the production site locally.
-
-Make sure
+In order to ensure we only retain the least amount of data necessary, this plugin provides some CLI commands to easily anonymize or delete this personally identifiable data .
 
 ## Installing
 
@@ -23,21 +23,40 @@ Or
 
     wp plugin install https://github.com/humanmade/hm-anonymizer/archive/refs/heads/main.zip && wp plugin activate hm-anonymizer --network
 
-## Overview
+## Using
 
-Example of usage on a large WordPress multisite using Gravity forms with many submissions. Adjust as necessary for you project.
+Install and activate the plugin, then run WP CLI some of the provided commands as necessary to delete or anonymize user data from a WordPress site.
+
+It is recommended that you update your project documentation for setting the site up from a production database to include these steps to ensure that nobody has any personally identifiable information from the production site locally. You can also make the anonymized database available for other developers.
+
+Here is an example of usage on a large WordPress multisite using Gravity forms with many submissions. Adjust as necessary for you project.
 
 Run all of the following commands:
 
 ```
-wp plugin activate hm-anonymizer --network-wide
+# Import the database
+wp db import production-2024-04-01-079a3cd.sql
+
+# Search replace commands
+wp search-replace my-production-url.com my-local-url.dev --network
+
+# Install and activate HM Anonymizer plugin
+wp plugin install https://github.com/humanmade/hm-anonymizer/archive/refs/heads/main.zip && wp plugin activate hm-anonymizer --network
+
+# Anonymize users, comments, cleanup pending users and force delete any gravity forms data network wide.
 wp anonymizer anonymize-users
+wp site list --field=url | xargs -n1 -I % wp --url=% anonymizer anonymize-comments
 wp anonymizer delete-pending-users
 wp anonymizer force-delete-gravity-forms-entries-network-wide
+
+# Flush cache
 wp cache flush
+
+# Delete production database.
+rm production-2024-04-01-079a3cd.sql;
 ```
 
-Then delete any original database exports you have downloaded immediately afterwards.
+Make sure you also delete any other copies of the production database, such as zip/tar archives immediately.
 
 ## Commands
 
