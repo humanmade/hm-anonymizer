@@ -468,7 +468,7 @@ turkish
 turkmen
 turtle
 tuvaluan
-twi'lek
+twilek
 ugandan
 ukrainian
 unicorn
