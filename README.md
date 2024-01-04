@@ -33,7 +33,7 @@ Here is an example of usage on a large WordPress multisite using Gravity forms w
 
 Run all of the following commands:
 
-```
+```console
 # Import the database
 wp db import production-2024-04-01-079a3cd.sql
 
@@ -68,7 +68,7 @@ The following fields are also cleared: Description, all registered user contact 
 
 User Meta. Custom user meta fields are not anonymized. You can use the filter `hm_anoymizer.user_data` to modify user data and include any user meta fields.
 
-```
+```php
 add_filter( 'hm_anoymizer.user_data', function( $user_data ) {
 	// Add custom user meta data.
 	$user_data['meta_input']['custom-meta'] = 'supercalifragilisticexpialidocious';
@@ -89,7 +89,7 @@ wp anonymizer anonymize-users --exclude=1,2,3
 
 Anonymize comment data. If a user is associated with the comment, update comment data with user data, so this command is is intended to be run after you have anonymized users.
 
-```
+```console
 ## For one site only.
 wp anonymizer anonymize-comments --url="%s"
 
@@ -101,7 +101,7 @@ wp site list --field=url | xargs -n1 -I % wp --url=% anonymizer anonymize-commen
 
 On a WordPress Multisite, user data is stored in the signups table before the user is activated.
 
-```
+```console
 wp anonymizer delete-gravity-forms-entries
 ```
 
@@ -109,7 +109,7 @@ wp anonymizer delete-gravity-forms-entries
 
 Deletes all entries across all forms on a site.
 
-```
+```console
 wp anonymizer delete-gravity-forms-entries
 ```
 
@@ -121,7 +121,7 @@ The advantage of this command is that it is much faster for sites with very larg
 
 The disadvantage is that it doesn't call Gravity Forms functions directly, so no associated actions are fired and some things may not be cleaned up e.g. File uploads. Gravity form extensions may store data elsewhere and this will not be removed using this command so make sure to check.
 
-```
+```console
 wp anonymizer force-delete-gravity-forms-entries-network-wide
 ```
 
@@ -129,7 +129,7 @@ wp anonymizer force-delete-gravity-forms-entries-network-wide
 
 The WP stream plugin can store records in the database, and some records can contain user data such as users names. This command just purges the database tables that store the records.
 
-```
+```console
 wp anonymizer force-delete-stream-records
 ```
 
