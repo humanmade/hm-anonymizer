@@ -60,6 +60,25 @@ class Command extends WP_CLI_Command {
 	}
 
 	/**
+	 * Delete pending users.
+	 *
+	 * Delete all rows from signups table
+
+	 * @subcommand delete-pending-users
+	 */
+	public function delete_pending_users( $args, $assoc_args ) : void {
+		global $wpdb;
+
+		$query_result = $wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}signups" );
+
+		if ( $query_result ) {
+			WP_CLI::success( 'Deleted all pending users.' );
+		} else {
+			WP_CLI::error( 'Error deleting signups.' );
+		}
+	}
+
+	/**
 	 * Delete gravity forms entries.
 	 *
 	 * Delete all entries across all forms on a site without outputting any data to the screen.
