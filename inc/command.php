@@ -76,6 +76,14 @@ class Command extends WP_CLI_Command {
 		} else {
 			WP_CLI::error( 'Error deleting signups.' );
 		}
+
+		$query_result = $wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}registration_log" );
+
+		if ( $query_result ) {
+			WP_CLI::success( 'Deleted all data from registration log.' );
+		} else {
+			WP_CLI::error( 'Error deleting registration log data.' );
+		}
 	}
 
 	/**
