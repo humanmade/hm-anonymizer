@@ -62,12 +62,13 @@ class Command extends WP_CLI_Command {
 	/**
 	 * Delete gravity forms entries.
 	 *
-	 * Delete all entries across all forms without outputting any data to the screen.
+	 * Delete all entries across all forms on a site without outputting any data to the screen.
 	 * GF has some CLI commands but they're quite limited and output too much data to the screen.
+	 * For sites with a very large number of entries you might want to use the command empty-gravity-forms-entry-tables-network-wide
 	 *
 	 * ## Examples
 	 *
-	 *     Usage on multisite: wp site list --field=url | xargs -n1 -I % wp --url=% anonymizer delete_gravity_forms_entries
+	 *     Usage on multisite: wp site list --field=url | xargs -n1 -I % wp --url=% anonymizer delete-gravity-forms-entries
 	 *
 	 * @subcommand delete-gravity-forms-entries
 	 * @return void
@@ -78,23 +79,25 @@ class Command extends WP_CLI_Command {
 			return;
 		}
 
-		$offset = 0;
-		$batch_size = 100;
+		$batch_size = 500;
 
 		do {
 			WP_CLI::line( "Deleting a batch of $batch_size entries." );
 
 			$entries = GFAPI::get_entries( 0, [], null, [
 				'page_size' => $batch_size,
-				'offset' => $offset,
 			] );
 
 			foreach ( $entries as $entry ) {
-				GFAPI::delete_entry( $entry['id'] );
+				$deleted = GFAPI::delete_entry( $entry['id'] );
+				if ( ! is_wp_error( $deleted ) ) {
+					WP_CLI::success( 'Deleted entry ' . $entry['id'] . '.' );
+				} else  {
+					WP_CLI::error( 'Error deleting entry ' . $entry['id'] . '.' );
+				}
 			}
 
-
-			$offset += $batch_size;
+			sleep( 1 );
 		} while ( count( $entries ) > 0 );
 	}
 }
