@@ -3,9 +3,13 @@ humanmade/hm-anonymizer
 
 Quick links: [Using](#using) | [Installing](#installing) | [Contributing](#contributing) | [Support](#support)
 
-## Using
+## Summary.
 
-Activate the plugin.
+Activate the plugin, and run WP CLI to delete or anonymize user data from a WordPress site.
+
+Update your project documentation for copying a production database to include these steps to ensure that nobody has any personally identifyable information from the production site locally.
+
+Make sure
 
 ## Installing
 
@@ -18,6 +22,22 @@ Once you've done so, you can install this package with:
 Or
 
     wp plugin install https://github.com/humanmade/hm-anonymizer/archive/refs/heads/main.zip && wp plugin activate hm-anonymizer --network
+
+## Overview
+
+Example of usage on a large WordPress multisite using Gravity forms with many submissions. Adjust as necessary for you project.
+
+Run all of the following commands:
+
+```
+wp plugin activate hm-anonymizer --network-wide
+wp anonymizer anonymize-users
+wp anonymizer delete-pending-users
+wp anonymizer force-delete-gravity-forms-entries-network-wide
+wp cache flush
+```
+
+Then delete any original database exports you have downloaded immediately afterwards.
 
 ## Commands
 
@@ -45,12 +65,32 @@ add_filter( 'hm_anoymizer.user_data', function( $user_data ) {
 wp anonymizer anonymize-users --exclude=1,2,3
 ```
 
-### Delete Gravity Forms Entries
+### Delete Pending Users
 
-Delets all entries across all forms.
+On a WordPress Multisite, user data is stored in the signups table before the user is activated.
 
 ```
 wp anonymizer delete-gravity-forms-entries
+```
+
+### Delete Gravity Forms Entries
+
+Deletes all entries across all forms on a site.
+
+```
+wp anonymizer delete-gravity-forms-entries
+```
+
+### Force Delete Gravity Forms Entries Network Wide
+
+Force delete entries by removing them from all Gravity Forms database tables directly. This affects all known gravity forms tables in the network (with the current site prefix). It will also empty legacy tables.
+
+The advantage of this command is that it is much faster for sites with very large numbers of form submissions. In addition it removes legacy data and will catch any tables that for old sites that have been deleted but for some reason tables  remain in the database.
+
+The disadvantage is that it doesn't call Gravity Forms functions directly, so no associated actions are fired and some things may not be cleaned up e.g. File uploads. Gravity form extensions may store data elsewhere and this will not be removed using this command so make sure to check.
+
+```
+wp anonymizer force-delete-gravity-forms-entries-network-wide
 ```
 
 ## Contributing
