@@ -121,20 +121,20 @@ class Command extends WP_CLI_Command {
 	}
 
 	/**
-	 * Quickly empty gravity forms submission data across all sites on the network.
+	 * Force deletion of gravity forms submission data across all sites on the network.
 	 *
-	 * Use this command on sites with a large number of entries that cannot be cleaned using the delete-gravity-forms-entries command.
-	 * It also runs network wide, and will clean tables even if the plugin is not active, or the site no longer exists.
-	 * The command delete-gravity-forms-entries is better as it fires actions, cleans up file uploads etc. But is very slow when dealing with a lot of submissions and can miss things.
+	 * This command just deletes all rows from gravity form entry tables.
+	 * It is much quicker on sites with a large number of entries, but does not use GF functions so actions are not fired, and uploads not removed.
+	 * It also across all tables in the database with the current prefix. So can clean data even if the plugin is not active, or the site no longer exists.
 	 *
 	 * ## Examples
 	 *
-	 *     Usage on multisite: wp site list --field=url | xargs -n1 -I % wp --url=% anonymizer empty-gravity-forms-entry-tables-network-wide
+	 *     Usage on multisite: wp site list --field=url | xargs -n1 -I % wp --url=% anonymizer force-delete-gravity-forms-entries-network-wide
 	 *
-	 * @subcommand empty-gravity-forms-entry-tables-network-wide
+	 * @subcommand force-delete-gravity-forms-entries-network-wide
 	 * @return void
 	 */
-	public function empty_gravity_forms_entry_tables_network_wide() : void {
+	public function force_delete_gravity_forms_entries_network_wide() : void {
 		global $wpdb;
 
 		$table_results = $wpdb->get_results( $wpdb->prepare( "
