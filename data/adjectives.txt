@@ -316,7 +316,6 @@ ebullient
 edged
 edgy
 eerie
-eight
 elder
 elect
 electoral
@@ -384,7 +383,6 @@ first
 fiscal
 fishy
 fit
-five
 fixed
 fizzy
 flaky
@@ -400,11 +398,9 @@ fly
 foamy
 focal
 foggy
-fond
 fore
 foul
 found
-four
 foxy
 fragile
 frail
@@ -745,7 +741,6 @@ nice
 nifty
 nigh
 nimble
-nine
 ninth
 nippy
 noble
@@ -982,7 +977,6 @@ self
 sent
 serendipitous
 serene
-seven
 sewed
 sewn
 shady
@@ -1006,9 +1000,7 @@ silty
 silver
 sinister
 sissy
-six
 sixth
-sixty
 size
 sized
 skew
@@ -1124,7 +1116,6 @@ tawny
 teal
 technological
 telepathic
-ten
 tenacious
 tenor
 tense
@@ -1135,7 +1126,6 @@ testy
 thick
 thin
 third
-three
 thriving
 thunder gray
 tidal
@@ -1175,7 +1165,6 @@ tumid
 turquoise
 twee
 twin
-two
 ugly
 ultra
 ultraviolet

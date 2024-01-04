@@ -5,6 +5,7 @@ use GFAPI;
 use WP_CLI;
 use WP_CLI_Command;
 use WP_User_Query;
+use WP_Comment_Query;
 
 class Command extends WP_CLI_Command {
 
@@ -55,6 +56,75 @@ class Command extends WP_CLI_Command {
 
 			$offset += $batch_size;
 		} while ( count( $users ) > 0 );
+
+		WP_CLI::success( "Complete." );
+	}
+
+	/**
+	 * Anonymize Comments.
+	 *
+	 * Anonymize user data in comments.
+	 *
+	 * ## Examples
+	 *
+	 *     wp site list --field=url | xargs -n1 -I % wp --url=% anonymizer anonymize-comments
+	 *
+	 * [--alliteration]
+	 * : Alliterate user names.
+	 *
+	 * @subcommand anonymize-comments
+	 */
+	public function anonymize_comments( $args, $assoc_args ) : void {
+		$offset = 0;
+		$batch_size = 100;
+
+		$use_alliteration = ! empty( $assoc_args['alliteration'] );
+
+		do {
+			WP_CLI::line( "Updating a batch of $batch_size users." );
+
+			$query_args = [
+				'number' => $batch_size,
+				'offset' => $offset,
+				'orderby' => 'ID',
+				'comment_type' => 'editorial-comment',
+				'status' => 'any',
+			];
+
+			$comments_query = new WP_Comment_Query( $query_args );
+			$comments = $comments_query->comments;
+
+			foreach ( $comments as $comment ) {
+				$comment_data = [
+					'comment_ID' => $comment->comment_ID,
+					'comment_author_IP' => '0.0.0.0',
+					'include_unapproved' => true,
+				];
+
+				$user = $comment->user_id ? get_user_by( 'ID', $comment->user_id ) : null;
+
+				if ( $user ) {
+					$comment_data['comment_author'] = $user->data->display_name;
+					$comment_data['comment_author_email'] = $user->data->display_name;
+					$comment_data['comment_url'] = '';
+				} else {
+					$user_data = generate_user_data( $use_alliteration );
+					$comment_data['comment_author'] = $user_data['display_name'];
+					$comment_data['comment_author_email'] = $user_data['user_email'];
+					$comment_data['comment_url'] = $user_data['user_url'];
+				}
+
+				$updated = wp_update_comment( $comment_data );
+
+				if ( $updated !== false && ! is_wp_error( $updated ) ) {
+					WP_CLI::success( "Updated comment: $comment->comment_ID." );
+				} else {
+					WP_CLI::error( "Failed to update comment: $comment->comment_ID.", false );
+				}
+			}
+
+			$offset += $batch_size;
+		} while ( count( $comments ) > 0 );
 
 		WP_CLI::success( "Complete." );
 	}

@@ -65,6 +65,19 @@ add_filter( 'hm_anoymizer.user_data', function( $user_data ) {
 wp anonymizer anonymize-users --exclude=1,2,3
 ```
 
+
+### Anonymize comments.
+
+Anonymize comment data. If a user is associated with the comment, update comment data with user data, so this command is is intended to be run after you have anonymized users.
+
+```
+## For one site only.
+wp anonymizer anonymize-comments --url="%s"
+
+## Network wide
+wp site list --field=url | xargs -n1 -I % wp --url=% anonymizer anonymize-comments
+```
+
 ### Delete Pending Users
 
 On a WordPress Multisite, user data is stored in the signups table before the user is activated.
