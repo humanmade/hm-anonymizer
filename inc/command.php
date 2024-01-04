@@ -150,9 +150,10 @@ class Command extends WP_CLI_Command {
 			FROM information_schema.tables
 			WHERE table_schema = %s
 			AND (
-				table_name REGEXP '^$wpdb->prefix([0-9]+_)?(gf_entry|df_lead)$'
-				OR table_name REGEXP '^$wpdb->prefix([0-9]+_)?(gf_entry|df_lead)_.+$'
+				table_name REGEXP '^$wpdb->prefix([0-9]+_)?(gf_entry|rg_lead)$'
+				OR table_name REGEXP '^$wpdb->prefix([0-9]+_)?(gf_entry|rg_lead)_.+$'
 				OR table_name REGEXP '^$wpdb->prefix([0-9]+_)?gf_draft_submissions$'
+				OR table_name REGEXP '^$wpdb->prefix([0-9]+_)?(gf|rg)_form_view$'
 			)
 		", DB_NAME ) );
 
@@ -160,9 +161,9 @@ class Command extends WP_CLI_Command {
 			$query_result = $wpdb->query( "TRUNCATE TABLE $result->table_name" );
 
 			if ( $query_result ) {
-				WP_CLI::success( 'Emptied table ' . $result->table_name . '.' );
+				WP_CLI::success( 'Emptied table ' . $result->table_name );
 			} else {
-				WP_CLI::error( 'Error emptying table ' . $result->table_name . '.' );
+				WP_CLI::error( 'Error emptying table ' . $result->table_name );
 			}
 		}
 	}
