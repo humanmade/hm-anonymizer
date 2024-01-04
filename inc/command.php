@@ -158,4 +158,18 @@ class Command extends WP_CLI_Command {
 			}
 		}
 	}
+
+	/**
+	 * Force deletion of stream plugin records
+	 *
+	 * This command deletes all rows from stream record database tables directly.
+	 *
+	 * @subcommand force-delete-stream-records
+	 * @return void
+	 */
+	public function force_delete_stream_records() : void {
+		global $wpdb;
+		$wpdb->query( "TRUNCATE TABLE {$wpdb->stream}" );
+		$wpdb->query( "TRUNCATE TABLE {$wpdb->streammeta}" );
+	}
 }

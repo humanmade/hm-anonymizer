@@ -93,6 +93,14 @@ The disadvantage is that it doesn't call Gravity Forms functions directly, so no
 wp anonymizer force-delete-gravity-forms-entries-network-wide
 ```
 
+### Force delete WP Stream plugin records.
+
+The WP stream plugin can store records in the database, and some records can contain user data such as users names. This command just purges the database tables that store the records.
+
+```
+wp anonymizer force-delete-stream-records
+```
+
 ## Contributing
 
 We appreciate you taking the initiative to contribute to this project.
