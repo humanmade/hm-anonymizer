@@ -42,6 +42,7 @@ function generate_user_data( bool $alliterate = false ) : array {
 	}
 
 	$first_name = $adjectives[ array_rand( $adjectives ) ];
+	$user_meta = [];
 
 	foreach ( array_keys( wp_get_user_contact_methods() ) as $contact_method ) {
 		$user_meta[ $contact_method ] = '';
