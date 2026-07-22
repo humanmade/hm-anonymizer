@@ -1,6 +1,9 @@
 humanmade/hm-anonymizer
 =======================
 
+> [!CAUTION]
+> HM Anonymizer is no longer maintained. We recommend using [WordPress Scrubber by 10up](https://github.com/10up/wp-scrubber) instead.
+
 Quick links: [Using](#using) | [Installing](#installing) | [Contributing](#contributing) | [Support](#support)
 
 When setting up a project locally, it is common to take a copy of the production database. Whilst this provides an accurate snapshot of the current site state, it can contain personally identifiable data that not desirable to keep locally. This includes but is not limited to
